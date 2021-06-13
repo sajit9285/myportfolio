@@ -169,7 +169,7 @@ footer {
   transition: 0.5s ease all; }
   .btn-rounded-white:hover {
     color: #3498db;
-    background: #F4C430;
+    background: rgba(130, 25, 144, 0.891);
     text-decoration: none; }
 
 .shadow {
@@ -500,37 +500,9 @@ footer {
     padding-right: 30px;
     line-height: 30px;
     color: #ffffff; }
-  #skills .skill_1 {
-    width: 80%;
-    background-color: #333333; }
-  #skills .skill_2 {
-    width: 70%;
-    background-color: #4d4d4d; }
-  #skills .skill_3 {
-    width: 40%;
-    background-color: #999999; }
-  #skills .skill_4 {
-    width: 60%;
-    background-color: #666666; }
-  #skills .skill_5 {
-    width: 30%;
-    background-color: #b3b3b3; }
-  #skills .skill_6 {
-    width: 65%;
-    background-color: #595959; }
-  #skills .skill_7 {
-    width: 72%;
-    background-color: #474747; }
-  #skills .skill_8 {
-    width: 68%;
-    background-color: #525252; }
-  #skills .skill_9 {
-    width: 45%;
-    background-color: #8c8c8c; }
-  #skills .skill_10 {
-    width: 55%;
-    background-color: #737373; }
 
+  #skills .container .logo{font-size: 5rem;} 
+  
     /*
     -------------------------------
     --- 10. Certifications Styles ---
@@ -541,25 +513,20 @@ footer {
   border: 1px solid #dbdcd9c9;
   text-align: center;
   background-color: #8c96ab1c;
+  
  }
-  #certifications h2 {
-    color: #374054;
-    margin-bottom: 50px;
-}
-
 #certifications table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
 
-td, th {
+#certifications td, th {
   border: 1px solid #dddddd;
   text-align: left;
-  padding: 8px;
+  padding: 8px;  
 }
-
-tr:nth-child(even) {
+#certifications tr:nth-child(even) {
   background-color: #dddddd;
 }
 

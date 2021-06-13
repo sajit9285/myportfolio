@@ -9,10 +9,68 @@
 	  window.dataLayer = window.dataLayer || [];
 	  function gtag(){dataLayer.push(arguments);}
 	  gtag('js', new Date());
-
 	  gtag('config', 'UA-167240296-1');
     </script>
-
+    <script src="https://kit.fontawesome.com/ecf41eb9cc.js" crossorigin="anonymous"></script>
+    <script>
+        var TxtType = function(el, toRotate, period) {
+            this.toRotate = toRotate;
+            this.el = el;
+            this.loopNum = 0;
+            this.period = parseInt(period, 10) || 2000;
+            this.txt = '';
+            this.tick();
+            this.isDeleting = false;
+        };
+    
+        TxtType.prototype.tick = function() {
+            var i = this.loopNum % this.toRotate.length;
+            var fullTxt = this.toRotate[i];
+    
+            if (this.isDeleting) {
+            this.txt = fullTxt.substring(0, this.txt.length - 1);
+            } else {
+            this.txt = fullTxt.substring(0, this.txt.length + 1);
+            }
+    
+            this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+    
+            var that = this;
+            var delta = 200 - Math.random() * 100;
+    
+            if (this.isDeleting) { delta /= 2; }
+    
+            if (!this.isDeleting && this.txt === fullTxt) {
+            delta = this.period;
+            this.isDeleting = true;
+            } else if (this.isDeleting && this.txt === '') {
+            this.isDeleting = false;
+            this.loopNum++;
+            delta = 500;
+            }
+    
+            setTimeout(function() {
+            that.tick();
+            }, delta);
+        };
+    
+        window.onload = function() {
+            var elements = document.getElementsByClassName('typewrite');
+            for (var i=0; i<elements.length; i++) {
+                var toRotate = elements[i].getAttribute('data-type');
+                var period = elements[i].getAttribute('data-period');
+                if (toRotate) {
+                new TxtType(elements[i], JSON.parse(toRotate), period);
+                }
+            }
+            // INJECT CSS
+            var css = document.createElement("style");
+            css.type = "text/css";
+            css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+            document.body.appendChild(css);
+        };
+    </script>
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ajit Kumar Singh - Portfolio</title>
@@ -23,6 +81,8 @@
     <link href="dist/bootstrap.min.css" rel="stylesheet">
     <link href="dist/css/main.css" rel="stylesheet">
     <link rel="stylesheet/less" type="text/css" href="styles.less" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
     <script src="less.js" type="text/javascript"></script>
 </head>
 
@@ -67,10 +127,11 @@
     <div id="lead">
         <div id="lead-content">
             <span class="profile-pic"><img src="images/portrait.jpg"></span>
-            <h1 id='name'>Ajit Kumar Singh</h1>
-            <marquee behavior="alternate" direction="left"><h4 id='intro'>Data Scientist, Programmer, Big Data enthusiast</marquee>
-
             
+            <h2 id="typewritter" style="padding-bottom:1em;">
+            <div href="" class="typewrite" data-period="1000" data-type='[ "Hi, I am Ajit", "I am a Data Scientist", "I am Big Data Enthusiast", "I am a Mechanical Engineer by Degree" ]' style="color: rgba(50, 90, 208, 0.796);font-family: cursive;">
+                <span class="wrap"></span>
+            </div> </h2>
             <a href="https://drive.google.com/uc?export=download&id=1Hj8LDXttFYge-olnyY7Bdgk3kGLRwwfI" class="btn-rounded-white" download><i class="fa fa-download" aria-hidden="true"></i> Resume<i></i></a>
         </div>
         <!-- End #lead-content -->
@@ -94,10 +155,10 @@
                 </div>
                 <div class="col-md-8">
                     <p>
-                       Hi, I am Ajit. I have done my Bachelor in Mechanical Engineering from Indian Institute of Technology Guwahati. I am big data enthusiast and currently using its related technologies for solving real world problems in Healthcare sectors.
+                       Hi, I am Ajit. I have done my B.Tech in Mechanical Engineering from Indian Institute of Technology (IIT) Guwahati. I am big data enthusiast and currently using its related technologies for solving real world problems in Healthcare sectors.
                        I have also hands-on experience with machine learning frameworks like Tensorflow and Pytorch, and have done several related projects.   
-                       </p>
                     </p>
+                    
                 </div>
             </div>
         </div>
@@ -107,8 +168,19 @@
     <div id="experience" class="background-alt">
         <h2 class="heading">Experience</h2>
         <div id="experience-timeline">
+            <div data-date="June 2021 - Present">
+                <h3 id="hilabs"><a href="https://hilabs.com/" target="blank" style="text-decoration:none;color: rgba(3, 107, 252, 1,0.5);">HiLabs Inc.</a></h3>
+                <h4>Data Scientist (FTE)</h4>
+                <p>
+                    <ul>
+                        <li>Leveraging the power of big data and its related tools to solve problems related to Healthcare sector </li>
+                        
+                    </ul>
+                </p>
+                
+            </div>    
             <div data-date="February 2021 – May 2021">
-                <h3 style="color: rgba(3, 111, 252, 0.693);" id="hilabs"><a href="https://hilabs.com/" target="blank" style="text-decoration:none">HiLabs Inc.</a></h3>
+                <h3 id="hilabs"><a href="https://hilabs.com/" target="blank" style="text-decoration:none;color: rgba(3, 107, 252, 0.5);">HiLabs Inc.</a></h3>
                 <h4>Data Scientist Intern</h4>
                 <p>
                     <ul>
@@ -119,7 +191,7 @@
                 <p><b>Technologies Used</b> - Scala, Apache Spark, Hadoop, Bash, MySql, Python</p>
             </div>      
             <div data-date="May 2020 – July 2020">
-                <h3 style="color: rgba(210, 20, 220, 0.816);" id="geminisolutions"><a href="https://www.geminisolutions.com/" target="blank" style="text-decoration:none">Gemini Solutions Pvt. Ltd.</a></h3>
+                <h3 id="geminisolutions"><a href="https://www.geminisolutions.com/" target="blank" style="text-decoration:none;color: rgba(210, 20, 220, 0.816);">Gemini Solutions Pvt. Ltd.</a></h3>
                 <h4>Technical Trainee</h4>
                 <p>
                     <ul>
@@ -130,14 +202,13 @@
                 <p><b>Technologies Used</b> - Deep Learning, Natural Language Processing(NLP), Python, Pytorch, Numpy, Pandas, Matplot, Scipy</p>
             </div>         
             <div data-date="December 2019 - February 2020">
-                <h3 style="color: rgb(20, 220, 110);" class="sensegrass"><a href="https://www.sensegrass.com/" target="blank" style="text-decoration:none">Sensegrass</a></h3>
+                <h3 class="sensegrass"><a href="https://www.sensegrass.com/" target="blank" style="text-decoration:none;color: rgb(20, 220, 110);">Sensegrass</a></h3>
                 <h4>Machine Learning Intern</h4>
                 <p>
                     <ul>
                         <li> Processed satellite data into several Agriculture based spectral indices and created
                             data ingestion and indices processing pipeline.</li>
                     </ul>
-                   
                 </p>
                 <p><b>Technologies Used</b> - Python, Image processing, OpenCV, Machine Learning, QGIS.</p>
             </div>
@@ -195,7 +266,7 @@
                                 has best rating Indian restaurants.
                             </p>
                             <p>
-                                <strong>Technology :</strong> Python, Data analysis and Visualization, Foursquare API, Location Data, Pandas,
+                                <strong>Technologies Used :</strong> Python, Data analysis and Visualization, Foursquare API, Location Data, Pandas,
                                 folium.
                             </p> 
                         </p>
@@ -220,7 +291,7 @@
                                 <strong>  Result:</strong> Accuracy Rate : 98.13
                             </p>
                             <p>
-                                <strong>Technology :</strong> Python, Data analysis and Visualization, NLTK, Pandas, scikit learn.
+                                <strong>Technologies Used :</strong> Python, Data analysis and Visualization, NLTK, Pandas, scikit learn.
                             </p>
                                                     
                             
@@ -245,7 +316,7 @@
                                 <strong>  Result:</strong> Accuracy Rate : 78.57%
                             </p>
                             <p>
-                                <strong>Technology :</strong> Python, Data analysis and Visualization, Pandas, scikit learn, keras.
+                                <strong>Technologies Used :</strong> Python, Data analysis and Visualization, Pandas, scikit learn, keras.
                             </p>
                                                     
                             
@@ -272,10 +343,8 @@
                                 improvisations with LSTMs and trigger word detection.
                             </p>
                             <p>
-                                <strong>Technology :</strong> Python, Tensorflow, Keras, Matplot, Numpy, scipy, seaborn
+                                <strong>Technologies Used :</strong> Python, Tensorflow, Keras, Matplot, Numpy, scipy, seaborn
                             </p>
-                                                    
-                            
                         </p>
                         <a href="https://bit.ly/2FpRMMY" target="blank"><i class="fa fa-eye"></i> Project</a>
                     </div>
@@ -297,7 +366,7 @@
                                 <strong>  Result:</strong> f1-score : 1.00
                             </p>
                             <p>
-                                <strong>Technology :</strong> Python, Data analysis and Visualization, Pandas, scikit learn.
+                                <strong>Technologies Used :</strong> Python, Data analysis and Visualization, Pandas, scikit learn.
                             </p>
                                                     
                             
@@ -322,10 +391,8 @@
                                 <strong>  Result:</strong> Accuracy Rate : 37.6% (K=1)
                             </p>
                             <p>
-                                <strong>Technology :</strong> Python, NLTK, Pytorch, word embeddings, sentence embeddings.
+                                <strong>Technologies Used :</strong> Python, NLTK, Pytorch, word embeddings, sentence embeddings.
                             </p>
-                                                    
-                            
                         </p>
                         <a href="https://colab.research.google.com/drive/1CmRzOunx3uybBXOGThgh1ntxJhynBOxF?usp=sharing" target="blank"><i class="fa fa-eye"></i> Project</a>
                     </div>
@@ -347,7 +414,7 @@
                                 <strong>  Result:</strong> Built a 3*3 grid color game and deployed on github.
                             </p>
                             <p>
-                                <strong>Technology :</strong> HTML, CSS,  javascript, visual studio.
+                                <strong>Technologies Used :</strong> HTML, CSS,  javascript, visual studio.
                             </p>
                                                     
                             
@@ -372,7 +439,7 @@
                                 <strong>  Result:</strong> Built and deployed on github.
                             </p>
                             <p>
-                                <strong>Technology :</strong> HTML, CSS, javascript, jQuery, VS Code.
+                                <strong>Technologies Used :</strong> HTML, CSS, javascript, jQuery, VS Code.
                             </p>
                                                     
                             
@@ -397,7 +464,7 @@
                                 <strong>  Result:</strong> Built and deployed on render and azure.
                             </p>
                             <p>
-                                <strong>Technology :</strong> Python, Computer Vision, Fastai, Pytorch, rendor.
+                                <strong>Technologies Used :</strong> Python, Computer Vision, Fastai, Pytorch, rendor.
                             </p>
                                                     
                             
@@ -422,7 +489,7 @@
                                 <strong>  Result:</strong> Built a CNN model on CIFAR-10 dataset, which consists of 60,000 color images in 10 classes.
                             </p>
                             <p>
-                                <strong>Technology :</strong> Python, CNN, Image Analysis, Pandas, scikit learn.
+                                <strong>Technologies Used :</strong> Python, CNN, Image Analysis, Pandas, scikit learn.
                             </p>
                         </p>
                         <a href="https://github.com/sajit9285/Object-Recognition" target="blank"><i class="fa fa-eye"></i> Project</a>
@@ -437,42 +504,53 @@
 
 
     <div id="skills">
-        <h2 class="heading">Top Skills</h2>
-        <div class="single-wrapper">
-            <div class="skills-area skill_1" style="text-align: left;">Python</div>
+        <div >
+            <h2 class="heading" >Skills</h2>
         </div>
-        <div class="single-wrapper">
-            <div class="skills-area skill_2" style="text-align: left;">C/C++</div>
+        <div class="container">
+            <div>
+                <div class="col-12 col-sm-4">
+                    <div class="logo"> <div ><span class="iconify" data-icon="logos-python" data-inline="false"></span></div></div>
+                    <h3>Python</h3>
+                    <p>Pandas, Numpy, Tensorflow &amp ScikitLearn</p>
+                </div>
+                
+                <div class="col-12 col-sm-4">
+                    <div class="logo"> <div ><span class="iconify" data-icon="logos-aws" data-inline="false"></span></div></div>
+                    <h3>Cloud Engineering</h3>
+                    <p>AWS EC2</p>
+                </div>
+                <div class="col-12 col-sm-4">
+                    <div class="logo"><span class="iconify" data-icon="logos-scala" data-inline="false"></span></div>
+                    <h3>Scala</h3>
+                    <p>Apache Spark</p>
+                </div>
+                <div class="col-12 col-sm-4">
+                    <div class="logo"> <div ><span class="iconify" data-icon="logos-mysql" data-inline="false"></span></div></i></div>
+                    <h3>Databases</h3>
+                    <p>MySQL, MSSQL</p>
+                </div>
+                <div class="col-12 col-sm-4">
+                    <div class="logo"> <div ><span class="iconify" data-icon="logos-hadoop" data-inline="false"></span></div></i></div>
+                    <h3>Hadoop</h3>
+                    <p>HDFS, Apache Spark, Spark SQL</p>
+                </div>
+                <div class="col-12 col-sm-4">
+                    <div class="logo"> <div ><span class="iconify" data-icon="logos:c-plusplus" data-inline="false"></span></div></i></div>
+                    <h3>C/C++</h3>
+                    <p>General Programming, OOPs</p>
+                </div>
+                <div class="col-12 col-sm-4">
+                    <div class="logo"> <div ><span class="iconify" data-icon="vscode-icons:file-type-htmlhint" data-inline="false"></span></div></i></div>
+                    <h3>Web Technologies</h3>
+                    <p>HTML5, CSS3 &amp JavaScript</p>
+                </div>
+            </div>
         </div>
-        <div class="single-wrapper">
-            <div class="skills-area skill_3" style="text-align: left;">Scala</div>
-        </div>   
-        <div class="single-wrapper">
-            <div class="skills-area skill_4" style="text-align: left;">HTML/CSS</div>
-        </div>
-        <div class="single-wrapper">
-            <div class="skills-area skill_5" style="text-align: left;">Hadoop</div>
-        </div>
-        <div class="single-wrapper">
-            <div class="skills-area skill_6" style="text-align: left;">Pytorch</div>
-        </div> 
-        <div class="single-wrapper">
-            <div class="skills-area skill_7" style="text-align: left;">Tensorflow</div>
-        </div>
-        <div class="single-wrapper">
-            <div class="skills-area skill_8" style="text-align: left;">Keras/Fastai</div>
-        </div>
-        <div class="single-wrapper">
-        <div class="skills-area skill_9" style="text-align: left;">Apache Spark</div>
-        </div>
-        <div class="single-wrapper">
-            <div class="skills-area skill_10" style="text-align: left;">MySQL</div>
-        </div>
-    </div>  
-
+</div>
     <!-- Certifications section-->
     
-     <div id="certifications">
+    <div id="certifications">
         <h2 class="heading">Certifications</h2>
             <table id="certifications-table">
                 <tr>
@@ -490,14 +568,11 @@
                     <td>Deep Learning Specialization</td>
                     <td><i>Deeplearning.AI(Coursera)</i></td>
                     <td>16 Weeks</td>
-                   
-
                 </tr>
                 <tr>
                     <td>Learn ML By Building Projects</td>
                     <td><i>Eduonix</i></td>
                     <td>8 Weeks</td>
-                   
                 </tr>
                 <tr>
                     <td>Tensorflow in Practice Specialization</td>
@@ -509,7 +584,6 @@
                     <td>IBM Data Science Professional Certifications</td>
                     <td><i>IBM(Coursera)</i></td>
                     <td>12 Weeks</td>
-                  
                 </tr>
                 <tr>
                     <td>Deep Learning for Coders</td>
@@ -566,7 +640,7 @@
             <div class="row">
                 <div class="col-sm-5 copyright">
                     <p>
-                        Copyright &copy; 2020 Ajit Kumar Singh
+                        Copyright &copy; 2021 Ajit Kumar Singh
                     </p>
                 </div>
                 <div class="col-sm-2 top">
